@@ -17,7 +17,6 @@ var maxSubarrayLength = function(nums, k) {
         hashmap.set(nums[right], 1);
 
         while(hashmap.get(nums[right]) > k){
-            console.log(count);
             hashmap.set(nums[left], hashmap.get(nums[left])-1);
             left++;
         }
