@@ -5,36 +5,28 @@
  */
 var countSubarrays = function(nums, k) {
     let left = 0;
+    let count = 0;
     let max = -Infinity;
     let maxcount = 0;
-    let count = 0;
-    let kcount = 0;
+    let mcount = 0;
 
     for(let i=0;i<nums.length;i++){
-        if(max < nums[i])
+        if(max<nums[i])
         max = nums[i];
     }
 
-    for(let i=0;i<nums.length;i++){
-        if(max === nums[i])
-        maxcount++;
-    }
 
-    if(maxcount < k)
-    return 0;
+    for(let right = 0; right<nums.length; right++){
+        if(max === nums[right])
+        mcount++;
 
-    for(let right=0; right<nums.length; right++){
-        if(nums[right]===max)
-        kcount++;
-
-        while(kcount >= k){
-            if(nums[left]==max)
-            kcount--;
-            left++;
+        while(mcount >=k){
+            if(nums[left]===max)
+            mcount--;
+            left++
         }
-
-        count = count + right - left + 1;
+        count += right - left + 1;
     }
 
-    return ((nums.length*(nums.length+1))/2)-count;
+    return (nums.length*(nums.length+1))/2 - count;
 };
