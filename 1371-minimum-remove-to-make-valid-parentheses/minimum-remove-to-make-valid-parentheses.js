@@ -6,6 +6,7 @@ var minRemoveToMakeValid = function(s) {
     let str = "";
     let stack = [];
     let index = [];
+    let map = new Set();
 
     for(let i=0;i<s.length;i++){
         if(s[i]=="("){
@@ -22,11 +23,14 @@ var minRemoveToMakeValid = function(s) {
                 index.pop();
             }
         }
+    }
 
+    for(let i=0;i<index.length;i++){
+        map.add(index[i]);
     }
 
     for(let i=0;i<s.length;i++){
-        if(index.includes(i))
+        if(map.has(i))
         continue;
 
         str+=s[i];
