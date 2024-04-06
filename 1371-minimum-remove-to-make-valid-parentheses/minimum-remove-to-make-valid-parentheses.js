@@ -6,8 +6,6 @@ var minRemoveToMakeValid = function(s) {
     let str = "";
     let stack = [];
     let index = [];
-    let count1 = 0;
-    let count2 = 0;
 
     for(let i=0;i<s.length;i++){
         if(s[i]=="("){
