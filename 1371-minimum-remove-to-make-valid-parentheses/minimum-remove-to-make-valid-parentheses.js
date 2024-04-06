@@ -4,29 +4,30 @@
  */
 var minRemoveToMakeValid = function(s) {
     let str = "";
+    let count = 0;
     let stack = [];
-    let index = [];
     let map = new Set();
 
     for(let i=0;i<s.length;i++){
         if(s[i]=="("){
-            stack.push(s[i]);
-            index.push(i);
+            count++;
+            stack.push(i);
         }
 
         if(s[i]==")"){
-            if(stack.length==0){
-                index.push(i);
+            if(count == 0){
+                stack.push(i);
             }
             else{
                 stack.pop();
-                index.pop();
+                count--;
             }
         }
     }
+    console.log(stack);
 
-    for(let i=0;i<index.length;i++){
-        map.add(index[i]);
+    for(let i=0;i<stack.length;i++){
+        map.add(stack[i]);
     }
 
     for(let i=0;i<s.length;i++){
