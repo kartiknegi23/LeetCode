@@ -3,22 +3,38 @@
  * @return {boolean}
  */
 var checkValidString = function(s) {
-    let low = 0;
-    let high = 0;
+    let stack = [];
+    let asterisk = [];
 
-    for (let i = 0; i < s.length; i++) {
-        if (s[i] === '(') {
-            low++;
-            high++;
-        } else if (s[i] === ')') {
-            if (low > 0) low--;
-            high--;
-        } else { // '*'
-            if (low > 0) low--;
-            high++;
+    for(let i=0;i<s.length;i++){
+        if(s[i]==="("){
+            stack.push(i);
         }
-        if (high < 0) return false;
+
+        else if(s[i]==="*"){
+            asterisk.push(i);
+        }
+
+        else if(s[i]===")"){
+            if(stack.length > 0)
+            stack.pop();
+
+            else if(asterisk.length > 0)
+            asterisk.pop();
+
+            else
+            return false;
+        }
     }
 
-    return low === 0;
+    while(stack.length && asterisk.length){
+        if(stack[stack.length-1] < asterisk[asterisk.length-1]){
+            stack.pop();
+            asterisk.pop();
+        }
+        else
+        return false;
+    }
+
+    return stack.length===0;
 };
