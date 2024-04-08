@@ -6,8 +6,8 @@ var isPowerOfThree = function(n) {
     if(n<=0 || n==2)
     return false;
 
-    if(n==3 || n==1)
-    return true;
-
-    return isPowerOfThree(n/3);
+    while(n%3===0){
+        n=n/3;
+    }
+    return n===1;
 };
