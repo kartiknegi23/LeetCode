@@ -4,29 +4,21 @@
  * @return {number}
  */
 var countStudents = function(students, sandwiches) {
-    let unableToEat = 0;
-    let queue = [...students]; // Create a copy of the students array
+    let counter = 0;
 
-    let index = 0;
-    while (index < queue.length) {
-        if (queue[index] === sandwiches[0]) {
-            // If the student prefers the current sandwich, remove the sandwich
-            queue.splice(index, 1);
+    while(students.length>0 && counter<students.length){
+
+        if(students[0]===sandwiches[0])
+        {
+            students.shift();
             sandwiches.shift();
-            index = 0; // Reset index to 0
-        } else {
-            // If the student doesn't prefer the current sandwich, move to the next student
-            index++;
+            counter = 0;
         }
 
-        // Check if all students have been served a sandwich
-        if (sandwiches.length === 0) {
-            break;
+        else{
+            students.push(students.shift());
+            counter++;
         }
     }
-
-    // The remaining students in the queue are unable to eat
-    unableToEat = queue.length;
-
-    return unableToEat;
-}
+    return students.length;
+};
