@@ -3,9 +3,9 @@
  * @return {number}
  */
 var longestMonotonicSubarray = function(nums) {
+    let countr = 1;
     let left = 0;
     let countl = 1;
-    let countr = 1;
 
     for(let right=1;right<nums.length;right++){
         if(nums[right] > nums[right-1]){
@@ -20,8 +20,9 @@ var longestMonotonicSubarray = function(nums) {
             left = right;
         }
 
-        if(nums[right]===nums[right-1])
-        left = right;
+        else{
+            left = right;
+        }
     }
     return Math.max(countl, countr);
 };
