@@ -24,15 +24,12 @@ var removeKdigits = function(num, k) {
         count--;
     }
 
-    console.log(stack);
 
     
     for(let i=0;i<stack.length;i++){
         if(parseInt(stack[i])===0 && parseInt(stack[i+1])>=0 && flag===false){
-            console.log("hello");
             stack.shift();
             i--;
-            console.log(stack);
         }
 
         else if(stack[i]!==0)
