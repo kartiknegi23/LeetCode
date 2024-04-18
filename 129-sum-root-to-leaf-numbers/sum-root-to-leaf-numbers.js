@@ -20,9 +20,6 @@ var sumNumbers = function(root) {
 
         s=s*10+root.val;
 
-        console.log(s);
-
-
         if(root.left===null && root.right===null)
         arr.push(s);
 
