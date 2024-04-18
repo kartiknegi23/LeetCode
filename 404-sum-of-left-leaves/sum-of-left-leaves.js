@@ -14,8 +14,6 @@ var sumOfLeftLeaves = function(root) {
     if(root===null)
     return 0;
 
-    let arr = [];
-
     let sum = 0;
     let isleft = false;
     function inorder(root, isleft){
