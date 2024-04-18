@@ -25,7 +25,6 @@ var sumOfLeftLeaves = function(root) {
         if(root.left===null && root.right===null && isleft===true)
         sum+=root.val;
 
-        console.log(root.val);
 
         inorder(root.left,true);
         
