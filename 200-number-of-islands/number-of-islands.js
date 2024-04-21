@@ -23,7 +23,6 @@ var numIslands = function(grid) {
         for(let j=0;j<col;j++){
             if(grid[i][j]==="1")
             {
-                console.log("hello", i, j);
                 count++;
                 dfs(i,j);
             }
