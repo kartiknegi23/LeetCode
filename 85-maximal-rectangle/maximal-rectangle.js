@@ -3,31 +3,33 @@
  * @return {number}
  */
 var maximalRectangle = function(matrix) {
-    let heights = new Array(matrix[0].length+1).fill(0);
-
+    let histogram = new Array(matrix[0].length).fill(0);
+    histogram.push(0);
     let row = matrix.length;
     let col = matrix[0].length;
-    let max = 0;
+    let area = 0;
 
-    for(let rows of matrix){
-        let stack = [];
+    for(let i=0;i<row;i++){
+        for(let j=0;j<col;j++){
+            if(matrix[i][j]==="1")
+            histogram[j]+=1;
 
-        for(let i=0;i<rows.length;i++){
-            heights[i] = (rows[i]==='1') ? heights[i]+1 : 0;
+            else
+            histogram[j]=0;
         }
-
-        for(let j=0;j<heights.length;j++){
-            let heightstart = j;
-
-            while(stack.length > 0 && stack[stack.length-1][1] > heights[j]){
-                let [pos,height] = stack.pop();
-                max = Math.max(max, (j-pos)*height);
+        
+        let stack = [];
+        for(let k=0;k<histogram.length;k++){
+            let heightstart = k;
+            while(stack.length && stack[stack.length-1][0]> histogram[k]){
+                let [height,pos] = stack.pop();
+                area = Math.max(area, height*(k-pos));
                 heightstart = pos;
             }
-
-            stack.push([heightstart, heights[j]]);
+            stack.push([histogram[k], heightstart]);
         }
+        
     }
-
-    return max;
+    console.log(histogram);
+    return area;
 };
