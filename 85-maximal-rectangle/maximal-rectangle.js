@@ -30,6 +30,5 @@ var maximalRectangle = function(matrix) {
         }
         
     }
-    console.log(histogram);
     return area;
 };
