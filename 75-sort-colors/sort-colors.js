@@ -2,45 +2,36 @@
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-function quicksort(nums,low,high){
-    if(low<high){
-        let pivot_index = find_index(nums,low,high);
+var sortColors = function(nums) {
+    let counta = 0;
+    let countb = 0;
+    let countc = 0;
 
-        quicksort(nums,low,pivot_index-1);
-        quicksort(nums,pivot_index+1,high);
+    for(let i=0;i<nums.length;i++){
+        if(nums[i] === 0)
+        counta++;
+
+        else if(nums[i]===1)
+        countb++;
+
+        else
+        countc++;
     }
-}
 
-function find_index(nums,low,high){
-    let i = low;
-    let j= high;
+    for(let i=0;i<nums.length;i++){
+        if(counta > 0)
+        {nums[i] = 0;
+        counta--;}
 
-    let pivot = nums[low];
+        else if(countb > 0){
+            nums[i] = 1;
+            countb--;
+        }
 
-    while(i<j){
-        while(nums[i]<=pivot && i<=high-1)
-        i++;
-
-        while(nums[j]>pivot && j>=low+1)
-        j--;
-
-        if(i<j)
-        {
-            let temp = nums[i];
-            nums[i] = nums[j];
-            nums[j] = temp;
+        else{
+            nums[i] = 2;
+            countc--;
         }
     }
-
-    let temp = nums[low];
-    nums[low] = nums[j];
-    nums[j] = temp;
     
-    return j;
-}
-
-
-var sortColors = function(nums) {
-    
-    quicksort(nums,0,nums.length-1);
 };
