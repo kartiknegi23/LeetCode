@@ -2,40 +2,31 @@
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
-
-function setrow(nums,i,col){
-    for(let j=0;j<col;j++){
-        if(nums[i][j]!==0)
-        nums[i][j]="marked";
-    }
-}
-
-function setcol(nums,j,row){
-    for(let i=0;i<row;i++){
-        if(nums[i][j]!==0)
-        nums[i][j]="marked";
-    }
-}
-
 var setZeroes = function(matrix) {
-    
-    let row = matrix.length;
-    let col = matrix[0].length;
+    let row = new Array(matrix.length).fill(0);
+    let col = new Array(matrix[0].length).fill(0);
 
+    let r = matrix.length;
+    let c = matrix[0].length;
 
-    for(let i=0;i<row;i++){
-        for(let j=0;j<col;j++){
+    for(let i=0;i<r;i++){
+        for(let j=0;j<c;j++){
             if(matrix[i][j]===0){
-                setrow(matrix,i,col);
-                setcol(matrix,j,row);
+                row[i]=1;
+                col[j]=1;
             }
         }
     }
 
-    for(let i=0;i<row;i++){
-        for(let j=0;j<col;j++){
-            if(matrix[i][j]==="marked")
-            matrix[i][j]=0;
+    for(let i=0;i<r;i++){
+        for(let j=0;j<c;j++){
+            if(row[i]===1){
+                matrix[i][j]=0;
+            }
+
+            if(col[j]===1){
+                matrix[i][j]=0;
+            }
         }
     }
 
