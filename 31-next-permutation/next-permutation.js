@@ -4,10 +4,9 @@
  */
 
 function reversesection(arr,j,n){
-    let mid = Math.floor((j+n)/2);
     let left=j;
     let right=n;
-    while(left<=mid){
+    while(left<right){
         let temp = arr[left];
         arr[left] = arr[right];
         arr[right] = temp;
