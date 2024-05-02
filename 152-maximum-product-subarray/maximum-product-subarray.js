@@ -3,14 +3,24 @@
  * @return {number}
  */
 var maxProduct = function(nums) {
+    let prefix = 1;
+    let suffix = 1;
     let max = -Infinity;
-    let ans = [];
+    let n = nums.length;
+
     for(let i=0;i<nums.length;i++){
-        let product = 1;
-        for(let j=i;j<nums.length;j++){
-            product=product*nums[j];
-            max = Math.max(max, product);
-        }
+        if(prefix===0)
+        prefix=1;
+
+        if(suffix===0)
+        suffix=1;
+
+        prefix=prefix*nums[i];
+        suffix=suffix*nums[n-1-i];
+
+        max = Math.max(max, Math.max(prefix,suffix));
+        console.log(max, prefix, suffix);
+
     }
 
     return max;
