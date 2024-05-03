@@ -25,8 +25,6 @@ var compareVersion = function(version1, version2) {
             j++;
         }
 
-        console.log(count1, count2);
-
         if(count1<count2)
         return -1;
 
