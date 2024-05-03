@@ -2,15 +2,15 @@
  * @param {number[]} nums
  * @return {number[]}
  */
-function msort(arr,low,high){
-    if(low === high)
+
+function mergesort(arr,low, high){
+    if(low===high)
     return;
 
     let mid = Math.floor((low+high)/2);
 
-    msort(arr,low,mid);
-
-    msort(arr,mid+1,high);
+    mergesort(arr,low,mid);
+    mergesort(arr,mid+1,high);
 
     merge(arr,low,mid,high);
 }
@@ -21,8 +21,7 @@ function merge(arr,low,mid,high){
     let right = mid+1;
 
     while(left<=mid && right<=high){
-        if(arr[left]<= arr[right])
-        {
+        if(arr[left]<=arr[right]){
             temp.push(arr[left]);
             left++;
         }
@@ -48,12 +47,12 @@ function merge(arr,low,mid,high){
     }
 }
 
+
 var sortArray = function(nums) {
-    let low = 0;
-    let high = nums.length-1;
-    let mid = Math.min((low+high)/2);
+  let low = 0;
+  let high = nums.length-1;
 
-    msort(nums,low,high);
+  mergesort(nums,low,high);
 
-    return nums;
+  return nums;  
 };
