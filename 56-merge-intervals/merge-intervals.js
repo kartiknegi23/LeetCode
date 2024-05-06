@@ -3,25 +3,22 @@
  * @return {number[][]}
  */
 var merge = function(intervals) {
-    intervals.sort((a,b)=>a[0]-b[0]);
     let ans = [];
+    intervals.sort((a,b)=>a[0]-b[0]);
+    let start = intervals[0][0];
+    let end = intervals[0][1];
 
-    for(let i=0;i<intervals.length;i++){
-        let start = intervals[i][0];
-        let end = intervals[i][1];
-
-        if(ans.length>0 && intervals[i][0]<=ans[ans.length-1][1])
-        continue;
-
-        for(let j=i+1;j<intervals.length;j++){
-            if(intervals[j][0]<=end){
-                end = Math.max(end, intervals[j][1]);
-            }
-            else
-            break;
+    for(let i=1;i<intervals.length;i++){
+        if(intervals[i][0]<=end){
+            end = Math.max(end, intervals[i][1]);
         }
-        ans.push([start,end]);
+        else{
+            ans.push([start,end]);
+            start = intervals[i][0];
+            end = intervals[i][1];
+        }
     }
+    ans.push([start,end]);
 
     return ans;
 };
