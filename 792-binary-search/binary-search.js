@@ -16,11 +16,11 @@ var search = function(nums, target) {
             left=mid+1;
         }
 
-        if(target<nums[mid]){
+        else if(target<nums[mid]){
             right=mid-1;
         }
 
-        else if(target===nums[mid]){
+        else{
             return mid;
         }
 
