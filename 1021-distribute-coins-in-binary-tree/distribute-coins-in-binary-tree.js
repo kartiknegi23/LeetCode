@@ -22,7 +22,6 @@ function dfs(node, context) {
     let coins = left[1] + right[1] + node.val;
 
     context.ans += Math.abs(coins - n);
-    console.log(coins, n, context.ans);
 
     return [n, coins];
 }
