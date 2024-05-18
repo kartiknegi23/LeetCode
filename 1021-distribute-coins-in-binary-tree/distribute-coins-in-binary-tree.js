@@ -27,7 +27,7 @@ function dfs(node, context) {
 }
 
 var distributeCoins = function (root) {
-    const context = { ans: 0 };  /// CLOSURE ///
+    const context = { ans: 0 };  /// OBJECTS ARE PASSED BY REFERENCE, HENCE THE CHANGE IN ANS IS REFLECTED IN ALL RECURSIVE CALLS!!!!!!!! ///
     dfs(root, context);
     return context.ans;
 };
