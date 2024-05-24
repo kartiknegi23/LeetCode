@@ -26,7 +26,7 @@ var maxScoreWords = function(words, letters, score) {
         }
 
         let tempmap = new Map(hashmap);
-        calc(i+1,point, new Map(tempmap)); //Not to PIck //
+        calc(i+1,point, tempmap); //Not to PIck //
 
         
         let temp = point;
