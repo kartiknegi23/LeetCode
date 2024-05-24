@@ -9,13 +9,11 @@ function check(nums,mid){
     let sum = 0;
     for(let i=0;i<nums.length;i++){
         sum+=nums[i];
-        console.log(sum,mid);
         if(sum>mid){
             count++;
             sum=nums[i];
         }
     }
-    console.log("count:",count)
     return count;
 }
 
