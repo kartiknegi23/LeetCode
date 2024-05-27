@@ -17,7 +17,7 @@ function check(nums,mid){
 var specialArray = function(nums) {
     
     
-    let low = 1;
+    let low = 0;
     let high = nums.length;
 
     while(low<=high){
