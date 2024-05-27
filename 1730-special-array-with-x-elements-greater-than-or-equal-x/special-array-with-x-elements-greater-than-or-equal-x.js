@@ -2,21 +2,40 @@
  * @param {number[]} nums
  * @return {number}
  */
+
+function check(nums,mid){
+    let count =0;
+    for(let i=0;i<nums.length;i++){
+        if(nums[i]>=mid)
+        count++;
+    }
+
+    return count;
+}
+
+
 var specialArray = function(nums) {
     
     
-    let ans = 0;
+    let low = 1;
+    let high = nums.length;
 
-    for(let i=0;i<=nums.length;i++){
-        let count = 0;
-        for(let j=0;j<nums.length;j++){
-            if(nums[j]>=i)
-            count++;
-        }
-        if(count===i)
+    while(low<=high){
+        let mid = Math.floor((low+high)/2);
+
+        let count = check(nums,mid);
+
+        if(count===mid)
         return count;
+
+        else if(count>mid){
+            low=mid+1;
+        }
+
+        else
+        high=mid-1;
     }
 
-    return -1;
 
+    return -1;
 };
