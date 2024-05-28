@@ -4,34 +4,26 @@
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
+    let m = matrix.length;
+    let n = matrix[0].length;
+    
     let low = 0;
-    let row = 0;
-    let high = matrix[0].length-1;
+    let high = (m*n)-1;
 
-    while(row<matrix.length){
+    while(low<=high){
+        let mid = Math.floor((low+high)/2);
 
-        if(matrix[row][low]<=target && target<=matrix[row][high])
-        while(low<=high){
-            
-            let mid = Math.floor((low+high)/2);
+        let row = Math.floor(mid/n);
+        let col = mid%n;
 
-            if(matrix[row][mid]===target)
-            return true;
+        if(matrix[row][col]===target)
+        return true;
 
-            else if(matrix[row][mid]>target)
-            high = mid-1;
+        else if(target > matrix[row][col])
+        low = mid+1;
 
-            else
-            low = mid+1;
-
-        }
-
-        low = 0;
-        high = matrix[0].length-1;
-
-        row++;
-        
-
+        else
+        high = mid-1;
     }
 
     return false;
