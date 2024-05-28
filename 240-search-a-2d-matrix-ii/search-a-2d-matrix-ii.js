@@ -9,6 +9,8 @@ var searchMatrix = function(matrix, target) {
     let high = matrix[0].length-1;
 
     while(row<matrix.length){
+
+        if(matrix[row][low]<=target && target<=matrix[row][high])
         while(low<=high){
             
             let mid = Math.floor((low+high)/2);
