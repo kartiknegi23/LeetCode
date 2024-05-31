@@ -15,9 +15,7 @@ var hasCycle = function(head) {
     let rabbit = head;
 
     while(rabbit!==null && rabbit.next!==null && tortoise!==null){
-        if(tortoise!==null)
         tortoise = tortoise.next;
-        if(rabbit!==null && rabbit.next!==null)
         rabbit = rabbit.next.next;
 
         if(rabbit===tortoise)
