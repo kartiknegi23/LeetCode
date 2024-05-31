@@ -10,22 +10,21 @@
  * @return {void} Do not return anything, modify node in-place instead.
  */
 var deleteNode = function(node) {
-    let temp = node;
-    let secondlast = temp.next;
+    let temp1 = node.next;
+    let temp2 = node;
 
-    while(temp.next!==null)
-    {
-    let ele = temp.val;
-    temp.val = temp.next.val;
-    temp.next.val = ele;
+    while(temp1!=null){
+        let t = node.val;
+        node.val = temp1.val;
+        temp1.val = t;
 
-    if(secondlast.next===null){
-        temp.next=null;
-        break;
+        node = node.next;
+        temp1=temp1.next;
     }
 
-    temp=temp.next;
-    secondlast = secondlast.next;
+    while(temp2.next!==node){
+        temp2=temp2.next;
     }
 
+    temp2.next=null;
 };
