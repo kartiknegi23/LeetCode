@@ -28,6 +28,9 @@ var rotateRight = function(head, k) {
 
     k = k%length;
 
+    if(k===0)
+    return head;
+
     let count = 0;
 
     while(count<k){
