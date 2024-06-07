@@ -22,10 +22,11 @@ var replaceWords = function(dictionary, sentence) {
     let arr = sentence.split(" ");
 
     for(let i=0;i<arr.length;i++){
-        str += findroot(arr[i], dictionary)+" ";
+        str += findroot(arr[i], dictionary);
+
+        if(i<arr.length-1)
+        str+=" ";
     }
     
-    ans = str.slice(0,-1);
-
-    return ans;
+    return str;
 };
