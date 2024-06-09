@@ -4,28 +4,12 @@
  * @return {number}
  */
 var numberOfChild = function(n, k) {
-    let arr = new Array(n).fill(0);
-    let count = 0;
-    let index = 0;
-    let frontflag = true;
-    let backflag = false;
-    while(count<k){
-        if(backflag === true){
-            index--;
-            count++;
-            if(index===0)
-            {backflag = false;
-            frontflag = true;}
-        }
+    let rounds = Math.floor(k/(n-1));
+    let remainder = k%(n-1);
 
-        else if(frontflag === true){
-            index++;
-            count++;
-            if(index>=(arr.length-1)){
-                backflag = true;
-                frontflag = false;
-            }
-        }
-    }
-    return index;
+    if(rounds%2===0)
+    return remainder;
+
+    else
+    return n-1-remainder;
 };
