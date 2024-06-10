@@ -3,34 +3,40 @@
  * @param {number[]} nums2
  * @return {number}
  */
-var minimumAddedInteger = function(nums1, nums2) {
-    nums1.sort((a,b)=>a-b);
-    nums2.sort((a,b)=>a-b);
+var minimumAddedInteger = function (nums1, nums2) {
+    let min = Infinity;
+    nums1.sort((a, b) => a - b);
+    nums2.sort((a, b) => a - b);
 
-    let ans = Infinity;
+    console.log(nums1, nums2);
 
-    for(let i=0;i<nums1.length;i++){
-        for(let j=i+1;j<nums1.length;j++){
-            let nums3 = [];
-            for(let k=0;k<nums1.length;k++){
-                if(k!==i && k!==j){
-                    nums3.push(nums1[k]);
-                }
+    for (let i = 0; i < Math.min(3, nums1.length); i++) {
+
+        let diff = nums2[0] - nums1[i];
+        let limit = 0;
+        let index = 0;
+        let flag = true;
+
+        for (let j = 0; j < nums1.length; j++) {
+
+            if (diff !== (nums2[index] - nums1[j]))
+                limit++;
+
+            else
+            index++;;
+
+            if (limit > 2) {
+                flag = false;
+                break;
             }
-            
-            let diff = nums2[0]-nums3[0];
 
-            for(let l=1;l<nums2.length;l++){
-                if(diff!==(nums2[l]-nums3[l]))
-                {   
-                    diff = Infinity;
-                    break;
-                }
-            }            
             
-            ans = Math.min(ans, diff);
-
         }
+
+        if (flag === true)
+            min = Math.min(min, diff);
+
     }
-    return ans;
+
+    return min;
 };
