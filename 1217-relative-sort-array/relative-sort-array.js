@@ -4,45 +4,45 @@
  * @return {number[]}
  */
 var relativeSortArray = function(arr1, arr2) {
-    
+    let hashmap = new Map();
+
+    for(let i=0;i<arr1.length;i++){
+        if(hashmap.has(arr1[i]))
+        hashmap.set(arr1[i], hashmap.get(arr1[i])+1);
+
+        else
+        hashmap.set(arr1[i], 1);
+    }
+
     let index = 0;
     for(let i=0;i<arr2.length;i++){
-        
-        for(let j=0;j<arr1.length;j++){
-            if(arr1[j]===arr2[i]){ 
-                let temp = arr1[j];
-                arr1[j] = arr1[index];
-                arr1[index] = temp;
-                index++;
-            }
+        while(hashmap.get(arr2[i]) > 0){
+            arr1[index] = arr2[i];
+            index++;
+            hashmap.set(arr2[i], hashmap.get(arr2[i])-1);
         }
+        hashmap.delete(arr2[i]);
     }
 
+    let remain = [];
+    let j=0;
 
-    let element = arr2[arr2.length-1];
-    index = arr1.indexOf(element);
-    let unique = Infinity;
-    let part1;
-    let part2;
-
-    for(let i=index+1;i<arr1.length;i++){
-        if(arr1[i]!==element)
+    for([key, value] of hashmap){
+        while(value > 0)
         {
-            unique = arr1[i];
-            part1 = arr1.slice(0,i);
-            part2 = arr1.slice(i,arr1.length);
-            break;    
+            remain.push(key);
+            value--;
         }
-
+        hashmap.delete(key);
     }
 
-    if(unique!==Infinity)
-    {
-    part2.sort((a,b)=>a-b);
-    part1.push(...part2);
-    return part1;
+    remain.sort((a,b)=>a-b);
+
+    for(let i=0;i<remain.length;i++){
+
+        arr1[index] = remain[i];
+        index++; 
     }
 
-    else
     return arr1;
 };
