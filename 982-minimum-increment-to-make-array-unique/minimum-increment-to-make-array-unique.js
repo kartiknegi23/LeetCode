@@ -12,6 +12,7 @@ var minIncrementForUnique = function(nums) {
     for(let i=0;i<nums.length;i++){
         if(hashmap.has(nums[i])){
             let sum = nums[i] + Math.abs(nums[i]-arr[i-1])+1;
+            count+= sum-nums[i];
             arr[i] = sum;
             hashmap.set(sum, 1);
         }
@@ -20,10 +21,6 @@ var minIncrementForUnique = function(nums) {
             hashmap.set(nums[i], 1);
             arr[i] = nums[i];
         }
-    }
-
-    for(let i=0;i<nums.length;i++){
-        count+= arr[i]-nums[i];
     }
 
     return count;
