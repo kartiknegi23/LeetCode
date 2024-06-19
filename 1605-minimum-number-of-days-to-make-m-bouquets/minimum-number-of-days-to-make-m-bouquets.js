@@ -5,53 +5,45 @@
  * @return {number}
  */
 var minDays = function(bloomDay, m, k) {
-    let max = -Infinity;
-    let min = Infinity;
-
-    if(m*k>bloomDay.length)
+    if(bloomDay.length<m*k)
     return -1;
 
+    let min = Infinity;
+    let max = -Infinity;
+
     for(let i=0;i<bloomDay.length;i++){
-        if(max<bloomDay[i])
-        max=bloomDay[i];
-
         if(min>bloomDay[i])
-        min=bloomDay[i];
-    }
+        min = bloomDay[i];
 
+        if(max<bloomDay[i])
+        max = bloomDay[i];
+    }
 
     let low = min;
     let high = max;
 
     while(low<=high){
-
         let mid = Math.floor((low+high)/2);
+        let count = 0;
+        let bouqeuts = 0;
 
-            let count = 0;
-            let total = 0;
-        for(let j=0;j<bloomDay.length;j++){
-            if(bloomDay[j]<=mid){
-                count++;
-            }
+        for(let i=0;i<bloomDay.length;i++){
+            if(bloomDay[i]<=mid)
+            count++;
+
             else{
-                total += Math.floor(count/k);
-                count=0;
+                bouqeuts += Math.floor(count/k);
+                count = 0;
             }
         }
-        total += Math.floor(count/k);
-        console.log(total);
-        if(total>=m)
-        {
-            high = mid-1;
-        }
+        bouqeuts += Math.floor(count/k);
 
-        else{
-            low=mid+1;
-        }
+        if(bouqeuts>=m)
+        high=mid-1;
 
+        else
+        low=mid+1;
     }
 
     return low;
-
-    
 };
