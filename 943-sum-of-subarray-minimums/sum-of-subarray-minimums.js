@@ -41,7 +41,6 @@ var sumSubarrayMins = function(arr) {
     for(let i=0;i<arr.length;i++){
         let left_sum = i-left_minimum_element[i];
         let right_sum = right_minimum_element[i] - i;
-        console.log(left_sum, right_sum);
         let product = left_sum*right_sum;
         let total = arr[i]*product;
         sum = (sum+total)%MOD;
