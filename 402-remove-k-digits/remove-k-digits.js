@@ -5,40 +5,42 @@
  */
 var removeKdigits = function(num, k) {
     let stack = [];
-    let count = k;
-    let flag = false;
-    str = "";
-
+    let count = 0;
     for(let i=0;i<num.length;i++){
-        while(num[i] < stack[stack.length-1] && stack.length>0 && count>0){
+        while(stack.length>0 && count<k && num[i]<stack[stack.length-1]){
             stack.pop();
-            count--;
+            count++;
         }
 
         stack.push(num[i]);
     }
 
-    //remove remaning element if k is still !==0 (that means we can remove more elements) //
-    while(count>0){
-        stack.pop(stack.length-1);
-        count--;
+    while(count<k){
+        stack.pop();
+        count++;
     }
 
+    console.log(stack);
 
-    
+    let str = "";
+    let flag = false;
     for(let i=0;i<stack.length;i++){
-        if(parseInt(stack[i])===0 && parseInt(stack[i+1])>=0 && flag===false){
-            stack.shift();
-            i--;
+        if(stack[i]==="0" && flag===false)
+        continue;
+
+        if(stack[i]!=="0")
+        {   
+            flag = true;
         }
+        
+        str+=stack[i];
 
-        else if(stack[i]!==0)
-        flag = true;
     }
 
-    for(let i=0;i<stack.length;i++){
-        str+=stack[i];
-    }    
+    if(str.length>0)
+    return str;
 
-    return str.length===0? "0" : str;
+    else
+    return "0";
+
 };
