@@ -29,7 +29,7 @@ var maxDistance = function(position, m) {
     position.sort((a,b)=>a-b);
 
     let low = 1;
-    let high = position[position.length-1];
+    let high = (position[position.length-1]-position[0]) / (m-1);
     let result=0;
 
     while(low<=high){
