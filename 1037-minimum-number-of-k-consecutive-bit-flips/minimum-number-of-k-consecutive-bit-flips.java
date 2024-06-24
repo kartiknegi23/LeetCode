@@ -1,25 +1,24 @@
 class Solution {
     public int minKBitFlips(int[] nums, int k) {
-        int result = 0;
         int count = 0;
-        boolean[] isflipped = new boolean[nums.length];
+        boolean[] isflip = new boolean[nums.length];
+        int flipstate = 0;
 
         for(int i=0;i<nums.length;i++){
-            if(i>=k && isflipped[i-k]==true ){
-                count--;
-            }
-            
-            if(count%2==nums[i]){
-                if(i+k>nums.length)
-                return -1;
+            if(i>=k && isflip[i-k]==true)
+            flipstate--;
 
-                result++;
-                count++;
-                isflipped[i]=true;
-            }
+            if((nums[i]==0 && flipstate%2==0) || (nums[i]==1 && flipstate%2==1))
+                {   
+                    if(i+k>nums.length)
+                    return -1;
 
-
+                    isflip[i] = true;
+                    flipstate++;
+                    count++;
+                }
+        
         }
-        return result;
+        return count;
     }
 }
