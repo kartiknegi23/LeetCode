@@ -1,30 +1,74 @@
 class Solution {
-    public int maximalRectangle(char[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0)
-            return 0;
-        
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        int[] heights = new int[cols + 1]; // Include an extra element for easier calculation
-        int maxArea = 0;
-        
-        for (char[] row : matrix) {
-            for (int i = 0; i < cols; i++) {
-                heights[i] = (row[i] == '1') ? heights[i] + 1 : 0;
-            }
+
+    public int[] calculate_left_min(int[] left_min, int[] row) {
+        Stack<Integer> stack = new Stack<>();
+        for (int i = 0; i < row.length; i++) {
+
+            while (!stack.isEmpty() && ((row[i] - '0') <= (row[stack.peek()]-'0') ) )
+                stack.pop();
+
+            if (stack.isEmpty())
+                left_min[i] = 0;
+
+            else
+                {   
+                    left_min[i] = stack.peek()+1;}
+
+            stack.push(i);
             
-            // Calculate max area using histogram method
-            int n = heights.length; // Number of bars in the histogram
-            
-            for (int i = 0; i < n; i++) {
-                for (int j = i, minHeight = Integer.MAX_VALUE; j < n; j++) {
-                    minHeight = Math.min(minHeight, heights[j]);
-                    int area = minHeight * (j - i + 1);
-                    maxArea = Math.max(maxArea, area);
-                }
-            }
+             
+        }
+        return left_min;
+    }
+
+    public int[] calculate_right_min(int[] right_min, int[] row) {
+        Stack<Integer> stack = new Stack<>();
+        for (int i = row.length - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && ((row[i] - '0') <= (row[stack.peek()]-'0') ) )
+                stack.pop();
+
+            if (stack.isEmpty())
+                right_min[i] = row.length - 1;
+
+            else
+                right_min[i] = stack.peek()-1;
+
+            stack.push(i);
         }
         
-        return maxArea;
+
+        return right_min;
+    }
+
+    public int maximalRectangle(char[][] matrix) {
+        int max_area = 0;
+        int[] arr = new int[matrix[0].length];
+        Arrays.fill(arr, 0);
+
+        for (int i=0;i<matrix.length;i++) {
+            
+            for(int j=0;j<matrix[0].length;j++){
+                if(matrix[i][j]=='1')
+                arr[j]++;
+
+                else
+                arr[j]=0;
+            }
+
+
+            int[] left_min = new int[matrix[0].length];
+            int[] right_min = new int[matrix[0].length];
+
+            left_min = calculate_left_min(left_min, arr);
+
+            right_min = calculate_right_min(right_min, arr);
+
+            for(int j=0;j<matrix[0].length;j++){
+                max_area = Math.max(max_area, ((right_min[j] - left_min[j] + 1) * arr[j]));
+            }
+
+
+        }
+        return max_area;
     }
 }
