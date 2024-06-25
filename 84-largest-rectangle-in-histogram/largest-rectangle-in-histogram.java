@@ -17,7 +17,6 @@ class Solution {
             stack.push(i);
         }
 
-        System.out.print("Left_Min-"+Arrays.toString(left_min));
         stack.clear();
 
         for(int j=heights.length-1;j>=0;j--){
@@ -32,8 +31,6 @@ class Solution {
 
             stack.push(j);
         }
-
-        System.out.print("Right_Min-"+Arrays.toString(right_min));
 
         int area = 0;
         for(int i=0;i<heights.length;i++){
