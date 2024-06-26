@@ -4,7 +4,7 @@ class Solution {
         List<Integer> list = new ArrayList<>();
 
         for(int i=0;i<nums.length;i++){
-            if(!deque.isEmpty() && i-k==deque.peekFirst())
+            if(!deque.isEmpty() && i>=k && i-k==deque.peekFirst())
             deque.removeFirst();
 
             while(!deque.isEmpty() && nums[i]>nums[deque.peekLast()])
