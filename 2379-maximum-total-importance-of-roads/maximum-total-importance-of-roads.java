@@ -14,17 +14,12 @@ class Solution {
             }
         }
 
-        System.out.println(hashmap);
-
         AtomicInteger node = new AtomicInteger(n);
         hashmap.entrySet().stream()
                 .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
                 .forEach(entry -> {
-                    System.out.println("Key: " + entry.getKey() + ", Frequency: " + entry.getValue());
                     arr[entry.getKey()] = node.getAndDecrement();
                     });
-
-        System.out.println(Arrays.toString(arr));
 
         for(int i=0;i<roads.length;i++){
             result+= arr[roads[i][0]] + arr[roads[i][1]];
