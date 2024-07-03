@@ -6,10 +6,9 @@ class Solution {
         Arrays.sort(nums);
         int result = Integer.MAX_VALUE;
 
-        result = Math.min(result , nums[nums.length-4]-nums[0]);
-        result = Math.min(result , nums[nums.length-3]-nums[1]);
-        result = Math.min(result , nums[nums.length-2]-nums[2]);
-        result = Math.min(result , nums[nums.length-1]-nums[3]);   
+        for(int i=0;i<=3;i++){
+            result = Math.min(result, nums[nums.length-3+i-1]-nums[i]);
+        }
 
         return result;
     }
