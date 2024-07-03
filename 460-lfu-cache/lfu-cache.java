@@ -34,8 +34,7 @@ class LFUCache {
         }
 
         else{
-            current_size++;
-            if(current_size > capacity_){
+            if(current_size == capacity_){
                 DoubleLinkedList list = freqmap.get(min_frequency);
                 cache.remove(list.tail.prev.key);
                 list.remove(list.tail.prev);
@@ -44,10 +43,10 @@ class LFUCache {
             min_frequency = 1;
             Node newnode = new Node(key, value);
             DoubleLinkedList list = freqmap.getOrDefault(1, new DoubleLinkedList());
-
             list.addnode(newnode);
             freqmap.put(1, list);
             cache.put(key, newnode);
+            current_size++;
         }
     }
 
