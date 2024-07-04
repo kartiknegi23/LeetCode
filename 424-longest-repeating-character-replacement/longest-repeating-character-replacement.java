@@ -14,9 +14,7 @@ class Solution {
             if(change>k){
                 map[s.charAt(low)-'A']--;
                 max_frequency = 0;
-                for(int i=0;i<26;i++){
-                    max_frequency = Math.max(max_frequency, map[i]);
-                }
+             
                 low++;
                 change = (high-low+1) - max_frequency;
             }
