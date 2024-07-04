@@ -11,7 +11,7 @@ class Solution {
             max_frequency = Math.max(max_frequency, map[s.charAt(high)-'A']);
             int change = (high-low+1) - max_frequency;  //No of elements that are different from max frequent element in subarray//
 
-            while(change>k){
+            if(change>k){
                 map[s.charAt(low)-'A']--;
                 low++;
                 change = (high-low+1) - max_frequency;
