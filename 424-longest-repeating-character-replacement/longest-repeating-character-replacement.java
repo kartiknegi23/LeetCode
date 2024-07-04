@@ -9,9 +9,9 @@ class Solution {
         while(high<s.length()){
             map[s.charAt(high)-'A']++;
             max_frequency = Math.max(max_frequency, map[s.charAt(high)-'A']);
-            int change = (high-low+1) - max_frequency;
+            int change = (high-low+1) - max_frequency;  //No of elements that are different from max frequent element in subarray//
 
-            while(change>k){
+            if(change>k){
                 map[s.charAt(low)-'A']--;
                 max_frequency = 0;
                 for(int i=0;i<26;i++){
