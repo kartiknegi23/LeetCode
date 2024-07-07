@@ -1,11 +1,15 @@
 class Solution {
-    public int numSubarraysWithSum(int[] nums, int goal) {
-        int count1 = 0;
+
+    public int calculate_subarray(int[] nums, int goal){
+        int count = 0;
         int low = 0;
         int high = 0;
         int sum = 0;
+
+        if(goal<0)
+        return 0;
         
-        while(high<nums.length){  // In this loop we will calculate no of subarrays where sum<=target
+        while(high<nums.length){
             sum+=nums[high];
 
             while(sum>goal){
@@ -13,30 +17,15 @@ class Solution {
                 low++;
             }
 
-            count1 = count1 + (high-low+1);
+            count = count + (high-low+1);
             high++;
         }
+        return count;
+    }
+
+    public int numSubarraysWithSum(int[] nums, int goal) {
+
+        return calculate_subarray(nums, goal)-calculate_subarray(nums, goal-1);
         
-        if(goal==0)
-        return count1;
-
-        low=0;
-        high=0;
-        sum=0;
-        int count2 = 0;
-        int new_goal = goal-1;
-        while(high<nums.length){
-            sum+=nums[high];
-
-            while(sum>new_goal){
-                sum-=nums[low];
-                low++;
-            }
-
-            count2 = count2 + (high-low+1);
-            high++;
-        }
-
-        return count1-count2;
     }
 }
