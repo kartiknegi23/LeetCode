@@ -6,7 +6,7 @@ class Solution {
         int count = numBottles;
         int empty = numBottles;
         
-        while(Math.floor((double) empty/numExchange)>0){
+        while((empty/numExchange)>0){
             numBottles = empty/numExchange;
             empty = empty%numExchange;
             count+=numBottles;
