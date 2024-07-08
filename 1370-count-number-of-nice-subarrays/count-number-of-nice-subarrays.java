@@ -1,6 +1,9 @@
 class Solution {
 
     public int calc_sub(int[] nums, int k){
+        if(k<0)
+        return 0;
+
         int odd_count = 0;
         int high = 0;
         int low = 0;
