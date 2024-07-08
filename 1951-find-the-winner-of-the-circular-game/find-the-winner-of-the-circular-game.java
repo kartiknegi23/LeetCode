@@ -1,40 +1,17 @@
 class Solution {
     public int findTheWinner(int n, int k) {
-
-        List<Integer>list = new ArrayList<>();
-        int no_delete = 0;
+        Deque<Integer> deque = new ArrayDeque<>();
         for(int i=1;i<=n;i++){
-            list.add(i);
+            deque.addLast(i);
         }
 
-            int count = 0;
-            for(int i=0;i<list.size();i++){
-                if(list.get(i)==0 && i==(list.size()-1) && no_delete<(n-1)){
-                    i=-1;
-                    continue;
-                }
-                
-                
-                else if(list.get(i)==0)
-                continue;
-                count++;
-                if(count==k && no_delete<(n-1)){
-                    list.set((int) i, 0);
-                    no_delete++;
-                    count=0;
-                }
-
-                if(no_delete<(n-1) && i==(list.size()-1))
-                i=-1;
+        while(deque.size()>1){
+            for(int i=0;i<k-1;i++){
+                deque.addLast(deque.removeFirst());
             }
-        
-        System.out.println(list);
-
-
-        for(int i=0;i<list.size();i++){
-            if(list.get(i)!=0)
-            return list.get(i);
+            deque.removeFirst();
         }
-        return -1;
+
+        return deque.peek();
     }
 }
