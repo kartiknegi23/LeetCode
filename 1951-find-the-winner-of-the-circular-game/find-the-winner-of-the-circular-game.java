@@ -6,7 +6,6 @@ class Solution {
             list.add(i);
         }
 
-        while(list.size()>=2){
             int count = 0;
             for(int i=0;i<list.size();i++){
                 count++;
@@ -19,7 +18,7 @@ class Solution {
                 if(list.size()>=2 && i==(list.size()-1))
                 i=-1;
             }
-        }
+        
 
         return list.get((int) 0);
     }
