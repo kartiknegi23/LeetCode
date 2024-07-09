@@ -8,15 +8,19 @@ class Solution {
         for(int i=0;i<cardPoints.length;i++){
             total_sum+=cardPoints[i];
         }
-
-        while(high<cardPoints.length){
-            int sum=0;
-            for(int i=low;i<=high;i++){
+        
+        int sum=0;
+        for(int i=low;i<=high;i++){
                 sum+=cardPoints[i];
-            }
-            result = Math.max(result, total_sum-sum);
-            high++;
+        }
+        result = Math.max(result, total_sum-sum);
+
+        while(high<cardPoints.length-1){
+            sum-=cardPoints[low];
             low++;
+            high++;
+            sum+=cardPoints[high];
+            result = Math.max(result, total_sum-sum);
         }
         
         return result;
