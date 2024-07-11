@@ -1,6 +1,6 @@
 class Solution {
     public String reverseParentheses(String s) {
-        String str= "";
+        int count = 0;
         int flag = 1;
         Stack<Integer> stack = new Stack<>();
         Map<Integer, Integer> map = new HashMap<>();
@@ -14,7 +14,13 @@ class Solution {
                 map.put(j, i);
                 map.put(i, j);
             }
+            else{
+                count++;
+            }
         }
+
+        char[] str = new char[count];
+        int index = 0;
 
         for(int i=0;i<s.length();i+=flag){
             if(s.charAt(i)=='(' || s.charAt(i)==')'){
@@ -23,10 +29,11 @@ class Solution {
             }
 
             else{
-                str+=s.charAt(i);
+                str[index]=s.charAt(i);
+                index++;
             }
         }
 
-        return str;
+        return new String (str);
     }
 }
