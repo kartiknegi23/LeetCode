@@ -13,7 +13,7 @@ class Solution {
         set.add('O');
         set.add('U');
 
-        String result = "";
+        char[] result = new char[s.length()] ;
 
         for(int i=0;i<s.length();i++){
             if(set.contains(s.charAt(i)))
@@ -22,12 +22,12 @@ class Solution {
 
         for(int i=0;i<s.length();i++){
             if(set.contains(s.charAt(i)))
-            result+=stack.pop();
+            result[i]=stack.pop();
 
             else
-            result+=s.charAt(i);
+            result[i]=s.charAt(i);
         }
 
-        return result;
+        return new String (result);
     }
 }
