@@ -1,39 +1,38 @@
 class Solution {
-    public String reverseParentheses(String s) {
-        int count = 0;
-        int flag = 1;
-        Stack<Integer> stack = new Stack<>();
-        Map<Integer, Integer> map = new HashMap<>();
 
+    public StringBuilder reverse(int start, StringBuilder result){
+        StringBuilder str = new StringBuilder();
+        
+
+        for(int i=0;i<start;i++){
+            str.append(result.charAt(i));
+        }
+
+        for(int i=result.length()-1;i>=start;i--){
+            str.append(result.charAt(i));
+        }
+
+        return str;
+    }
+
+    public String reverseParentheses(String s) {
+        Stack<Integer>stack = new Stack<>();
+        StringBuilder result = new StringBuilder();
         for(int i=0;i<s.length();i++){
             if(s.charAt(i)=='('){
-                stack.push(i);
+                stack.push(result.length());
             }
+
             else if(s.charAt(i)==')'){
-                int j = stack.pop();
-                map.put(j, i);
-                map.put(i, j);
-            }
-            else{
-                count++;
-            }
-        }
-
-        char[] str = new char[count];
-        int index = 0;
-
-        for(int i=0;i<s.length();i+=flag){
-            if(s.charAt(i)=='(' || s.charAt(i)==')'){
-                i=map.get(i);
-                flag = -flag;
+                result = reverse(stack.peek(), result);
+                stack.pop();
             }
 
             else{
-                str[index]=s.charAt(i);
-                index++;
+                result.append(s.charAt(i));
             }
         }
 
-        return new String (str);
+        return result.toString();
     }
 }
