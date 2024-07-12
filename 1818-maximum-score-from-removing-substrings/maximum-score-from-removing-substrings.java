@@ -60,9 +60,6 @@ class Solution {
 
     public int maximumGain(String s, int x, int y) {
         
-        int sum1 = greedy1(s, x, y);
-        int sum2 = greedy2(s, y, x);
-
-        return sum2>sum1? sum2:sum1;
+        return x>y? greedy1(s, x, y): greedy2(s, y, x);
     }
 }
