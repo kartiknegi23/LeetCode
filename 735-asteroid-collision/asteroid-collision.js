@@ -9,7 +9,6 @@ var asteroidCollision = function(asteroids) {
     for(let i=0;i<asteroids.length;i++){
         let element = asteroids[i];
 
-        if((stack.length>0) && (element<0 && stack[stack.length-1]>0))
         while((stack.length>0) && (element<0 && stack[stack.length-1]>0)){
 
             if(Math.abs(stack[stack.length-1]) === Math.abs(element)){
