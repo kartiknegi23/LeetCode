@@ -1,51 +1,99 @@
 class Solution {
     public List<Integer> survivedRobotsHealths(int[] positions, int[] healths, String directions) {
-        int n = positions.length;
-        List<int[]> robots = new ArrayList<>();
+        TreeMap<Integer, Integer> leftmap = new TreeMap<>();
+        TreeMap<Integer, Integer> rightmap = new TreeMap<>();
 
-        for (int i = 0; i < n; ++i) {
-            robots.add(new int[]{positions[i], healths[i], directions.charAt(i), i});
+        LinkedHashMap<Integer, Integer> location_order = new LinkedHashMap<>();
+
+        for(int i=0;i<positions.length;i++){
+            location_order.put(positions[i], i);
         }
 
-        Collections.sort(robots, (a, b) -> Integer.compare(a[0], b[0]));
-
-        Stack<int[]> stack = new Stack<>();
-
-        for (int[] robot : robots) {
-            if (robot[2] == 'R' || stack.isEmpty() || stack.peek()[2] == 'L') {
-                stack.push(robot);
-                continue;
+        for(int i=0;i<directions.length();i++){
+            if(directions.charAt(i)=='R'){
+                rightmap.put(positions[i], healths[i]);
             }
 
-            if (robot[2] == 'L') {
-                boolean add = true;
-                while (!stack.isEmpty() && stack.peek()[2] == 'R' && add) {
-                    int last_health = stack.peek()[1];
-                    if (robot[1] > last_health) {
-                        stack.pop();
-                        robot[1] -= 1;
-                    } else if (robot[1] < last_health) {
-                        stack.peek()[1] -= 1;
-                        add = false;
-                    } else {
-                        stack.pop();
-                        add = false;
-                    }
-                }
-
-                if (add) {
-                    stack.push(robot);
-                }
+            else{
+                leftmap.put(positions[i], healths[i]);
             }
         }
 
-        List<int[]> resultList = new ArrayList<>(stack);
-        resultList.sort(Comparator.comparingInt(a -> a[3]));
 
-        List<Integer> result = new ArrayList<>();
-        for (int[] robot : resultList) {
-            result.add(robot[1]);
+        PriorityQueue<Integer>queue = new PriorityQueue<>();
+
+        for(Map.Entry<Integer, Integer> entry : rightmap.entrySet()){
+            queue.add(entry.getKey());
         }
+        
+        for(Map.Entry<Integer, Integer> entry : leftmap.entrySet()){
+            queue.add(entry.getKey());
+        }
+
+        List<Integer>list = new ArrayList<>();
+
+        while(queue.size()>0){
+            list.add(queue.poll());
+        }
+
+        int index = 0;
+        boolean flag = true;
+        Stack<Integer>stack = new Stack<>();
+
+        while(index<list.size()){
+
+            while(stack.size()>0 && rightmap.containsKey(stack.peek()) && leftmap.containsKey(list.get(index)) ){
+                int health1 = rightmap.get(stack.peek());
+                int health2 = leftmap.get(list.get(index));
+
+                if(health1>health2){
+                    rightmap.put(stack.peek(), rightmap.get(stack.peek())-1);
+                    flag = false;
+                    break;
+                }
+
+                else if(health1<health2){
+                    stack.pop();
+                    leftmap.put(list.get(index), leftmap.get(list.get(index))-1);
+                    flag = true;
+                }
+
+                else{
+                    stack.pop();
+                    flag = false;
+                    break;
+                    
+                }
+
+            } 
+
+            if(flag==true)
+            stack.push(list.get(index));
+            
+            index++;
+            flag = true;
+        }
+
+        List<Integer>result = new ArrayList<>();
+        LinkedHashMap<Integer, Integer> total = new LinkedHashMap<>();
+
+        while(stack.size()>0){
+            if(rightmap.containsKey(stack.peek())){
+                total.put(stack.peek(), rightmap.get(stack.peek()));
+                stack.pop();
+            }
+            else{
+                total.put(stack.peek(), leftmap.get(stack.peek()));
+                stack.pop();
+            }
+        }
+
+        for(int i=0;i<positions.length;i++){
+            if(total.containsKey(positions[i])){
+                result.add(total.get(positions[i]));
+            }
+        }
+
 
         return result;
     }
