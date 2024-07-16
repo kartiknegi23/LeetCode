@@ -19,22 +19,11 @@ class Solution {
             }
         }
 
-
-        PriorityQueue<Integer>queue = new PriorityQueue<>();
-
-        for(Map.Entry<Integer, Integer> entry : rightmap.entrySet()){
-            queue.add(entry.getKey());
-        }
-        
-        for(Map.Entry<Integer, Integer> entry : leftmap.entrySet()){
-            queue.add(entry.getKey());
-        }
-
         List<Integer>list = new ArrayList<>();
-
-        while(queue.size()>0){
-            list.add(queue.poll());
+        for (int position : positions) {
+            list.add(position);
         }
+        Collections.sort(list);
 
         int index = 0;
         boolean flag = true;
