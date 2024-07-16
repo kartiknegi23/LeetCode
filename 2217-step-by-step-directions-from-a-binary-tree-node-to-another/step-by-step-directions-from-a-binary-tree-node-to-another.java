@@ -73,9 +73,6 @@ class Solution {
         startpath = dfs(lowest_common, startValue, startpath);
         endpath = dfs(lowest_common, destValue, endpath);
 
-        System.out.println(startpath);
-        System.out.println(endpath);
-
 
         StringBuilder result = new StringBuilder();
 
