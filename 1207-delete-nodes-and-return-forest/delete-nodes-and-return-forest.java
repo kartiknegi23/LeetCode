@@ -14,12 +14,12 @@
  * }
  */
 class Solution {
-    public TreeNode dfs(TreeNode root, boolean flag, Set<Integer>set, List<TreeNode>result){
+    public TreeNode dfs(TreeNode root, Set<Integer>set, List<TreeNode>result){
         if(root==null)
         return root;
 
-        root.left = dfs(root.left, set.contains(root.val), set, result);
-        root.right = dfs(root.right, set.contains(root.val), set, result);
+        root.left = dfs(root.left, set, result);
+        root.right = dfs(root.right, set, result);
 
         if(set.contains(root.val)){
             if(root.left!=null)
@@ -40,7 +40,7 @@ class Solution {
             set.add(to_delete[i]);
         }
         List<TreeNode>result = new ArrayList<>();
-        root = dfs(root, true, set, result);
+        root = dfs(root, set, result);
 
         if(root!=null)
         result.add(root);
