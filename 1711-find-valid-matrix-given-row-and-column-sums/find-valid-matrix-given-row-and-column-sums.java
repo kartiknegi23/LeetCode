@@ -17,7 +17,7 @@ class Solution {
                 i++;
             }
 
-            else if(colSum[j]==0){
+            if(colSum[j]==0){
                 j++;
             }
         }
