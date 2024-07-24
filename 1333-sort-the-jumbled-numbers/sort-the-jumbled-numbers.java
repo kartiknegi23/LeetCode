@@ -28,10 +28,6 @@ class Solution {
 
         list.sort(Comparator.comparingInt(arr -> arr[0]));
 
-        for (int[] array : list) {
-            System.out.println(Arrays.toString(array));
-        }
-
         int[] firstElements = new int[list.size()];
 
         for (int i = 0; i < list.size(); i++) {
