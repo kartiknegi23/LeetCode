@@ -44,9 +44,7 @@ class Solution {
             i++;
         }
 
-        for (int j = low; j <= high; j++) {
-            nums[j] = temp[j - low];
-        }
+        System.arraycopy(temp, 0, nums, low, temp.length);
 
     }
 
