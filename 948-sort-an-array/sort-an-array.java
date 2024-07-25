@@ -13,7 +13,7 @@ class Solution {
     }
 
     public void merge(int[] nums, int low, int mid, int high) {
-        int[] temp = new int[high + 1];
+        int[] temp = new int[high-low + 1];
         int i = 0;
         int left = low;
         int right = mid + 1;
