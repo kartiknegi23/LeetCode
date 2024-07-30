@@ -1,8 +1,7 @@
 class Solution {
     public int fibo(int n, int[] dp){
         if(n<=1){
-            dp[n]=n;
-            return dp[n];
+            return dp[n]=n;
         }
 
         if(dp[n]!=-1)
