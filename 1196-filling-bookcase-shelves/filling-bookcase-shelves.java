@@ -30,9 +30,7 @@ class Solution {
 
     public int minHeightShelves(int[][] books, int shelfWidth) {
         for (int i = 0; i < 1000; i++) {
-            for (int j = 0; j < 1001; j++) {
-                dp[i][j] = -1;
-            }
+            Arrays.fill(dp[i], -1);
         }
 
         WIDTH = shelfWidth;
