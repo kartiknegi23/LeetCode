@@ -27,6 +27,8 @@ class Solution {
 
             if((r-l+1)==count){
                 result = Math.min(result, count-count1);
+                if(result==0)
+                break;
                 if(list.get(l)==1)
                 count1--;
                 l++;
