@@ -1,6 +1,9 @@
 class Solution {
     public int minSwaps(int[] nums) {
-        Integer[] integerArray = Arrays.stream(nums).boxed().toArray(Integer[]::new);
+        Integer[] integerArray = new Integer[nums.length];
+        for(int i=0;i<integerArray.length;i++){
+            integerArray[i] = nums[i];
+        }
         ArrayList<Integer>list = new ArrayList<>(Arrays.asList(integerArray));
         list.addAll(Arrays.asList(integerArray));
 
