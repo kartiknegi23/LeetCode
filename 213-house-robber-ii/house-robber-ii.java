@@ -35,9 +35,6 @@ class Solution {
 
         int last = calc(nums, nums.length-1, 1, dp);
 
-        System.out.println(first);
-        System.out.println(last);
-
         return Math.max(first, last);
     }
 }
