@@ -7,8 +7,6 @@ class Solution {
             map.put(arr[i], map.getOrDefault(arr[i], 0)+1);
         } 
 
-        System.out.println(map);
-
         for(Map.Entry<String, Integer> entry : map.entrySet()){
             String key = entry.getKey();
             Integer value = entry.getValue();
