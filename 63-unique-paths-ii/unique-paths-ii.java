@@ -35,15 +35,39 @@ class Solution {
         int m = obstacleGrid.length;
         int n = obstacleGrid[0].length;
 
-        if(m==1 && n==1 && obstacleGrid[0][0]==1)
-        return 0;
-
         int[][] dp = new int[m][n];
 
         for(int i=0;i<m;i++){
-            Arrays.fill(dp[i], -1);
+            for(int j=0;j<n;j++){
+                
+                if(i==0 && j==0){
+                    if(obstacleGrid[0][0]==0)
+                    dp[0][0]=1;
+
+                    else
+                    dp[0][0]=0;
+                }
+
+                else if(obstacleGrid[i][j]==1)
+                dp[i][j]=0;
+
+                else{
+                    int top = 0;
+                    int left = 0;
+
+                    if(i>0)
+                    top = dp[i-1][j];
+
+                    if(j>0)
+                    left = dp[i][j-1];
+
+                    dp[i][j] = top+left;
+
+                }
+
+            }
         }
 
-        return find_path(obstacleGrid, m-1, n-1, dp);
+        return dp[m-1][n-1];
     }
 }
