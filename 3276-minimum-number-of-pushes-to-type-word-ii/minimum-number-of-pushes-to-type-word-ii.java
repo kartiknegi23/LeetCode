@@ -1,44 +1,21 @@
 class Solution {
     public int minimumPushes(String word) {
+        Integer[] arr = new Integer[26];
+        Arrays.fill(arr, 0);
         int result = 0;
-        Map<Character, Integer> hashmap = new HashMap<>();
-        int count=0;
 
         for(int i=0;i<word.length();i++){
-            hashmap.put(word.charAt(i), hashmap.getOrDefault(word.charAt(i), 0)+1);
+            arr[word.charAt(i)-'a']+=1;
         }
 
-        List<Map.Entry<Character, Integer>> entrylist = new ArrayList<>(hashmap.entrySet());
+        Arrays.sort(arr, Collections.reverseOrder());
 
-        entrylist.sort((a,b)->{
-            return b.getValue()-a.getValue();
-        });
-
-        int unique = 0;
-        for(Map.Entry<Character, Integer> entry : entrylist){
-            int frequency = entry.getValue();
-            if(unique<8){
-                result+=frequency;
-                unique++;
-            }
-            else if(unique>=8 && unique<16){
-                frequency*=2;
-                result+=frequency;
-                unique++;
-            }
-            else if(unique>=16 && unique<24){
-                frequency*=3;
-                result+=frequency;
-                unique++;
-            }
-
-            else
-            {
-                frequency*=4;
-                result+=frequency;
-                unique++;
-            }
+        for(int i=0;i<26;i++){
+            int frequency = arr[i];
+            int multiplier = (i/8)+1;
+            result += (frequency*multiplier);
         }
+
         return result;
     }
 }
