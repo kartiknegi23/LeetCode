@@ -14,14 +14,8 @@ class Solution {
             return b.getValue()-a.getValue();
         });
 
-        Map<Character, Integer> sortedmap = new LinkedHashMap<>();
-
-        for(Map.Entry<Character, Integer> entry : entrylist){
-            sortedmap.put(entry.getKey(), entry.getValue());
-        }
-
         int unique = 0;
-        for(Map.Entry<Character, Integer> entry : sortedmap.entrySet()){
+        for(Map.Entry<Character, Integer> entry : entrylist){
             int frequency = entry.getValue();
             if(unique<8){
                 result+=frequency;
