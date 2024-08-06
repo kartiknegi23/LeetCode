@@ -1,73 +1,40 @@
 class Solution {
-    public int find_path(int[][] obstacleGrid, int row, int col, int[][] dp){
-        if(row==0 && col==0)
-        {
-            if(obstacleGrid[row][col]==0)
-            return 1;
-
-            else
-            return 0;
-        }
-
-        if(obstacleGrid[row][col] == 1){
-            return 0;
-        }
-
-        if(dp[row][col]!=-1)
-        return dp[row][col];
-
-        int top = 0;
-        int left = 0;
-
-        if(col>0){
-            left = find_path(obstacleGrid, row, col-1, dp);
-        }
-
-        if(row>0){
-            top = find_path(obstacleGrid, row-1, col, dp);
-        }
-
-        return dp[row][col] = top + left;
-    }
 
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
 
         int m = obstacleGrid.length;
         int n = obstacleGrid[0].length;
 
-        int[][] dp = new int[m][n];
+        int[] dp = new int[n];
 
         for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
+            int[] temp = new int[n];
+             for(int j=0;j<n;j++){
                 
-                if(i==0 && j==0){
-                    if(obstacleGrid[0][0]==0)
-                    dp[0][0]=1;
+                if(obstacleGrid[i][j]==1)
+                temp[j]=0;
 
-                    else
-                    dp[0][0]=0;
-                }
-
-                else if(obstacleGrid[i][j]==1)
-                dp[i][j]=0;
-
+                else if(i==0 && j==0)
+                temp[j]=1;
+                
                 else{
                     int top = 0;
                     int left = 0;
 
                     if(i>0)
-                    top = dp[i-1][j];
+                    top = dp[j];
 
                     if(j>0)
-                    left = dp[i][j-1];
+                    left = temp[j-1];
 
-                    dp[i][j] = top+left;
+                    temp[j] = top+left;
 
                 }
 
             }
+            dp = temp;
         }
 
-        return dp[m-1][n-1];
+        return dp[n-1];
     }
 }
