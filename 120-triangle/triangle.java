@@ -4,22 +4,24 @@ class Solution {
         int m = triangle.size();
         int n = triangle.get(triangle.size()-1).size();
 
-        int[][] dp = new int[m][n];
+        int[] dp = new int[n];
 
         for(int i=0;i<n;i++){
-            dp[m-1][i] = triangle.get(m-1).get(i);
+            dp[i] = triangle.get(m-1).get(i);
         }
 
         for(int i=n-2;i>=0;i--){
+            int[] temp = new int[n];
             for(int j=i;j>=0;j--){
-                int down = triangle.get(i).get(j) + dp[i+1][j];
+                int down = triangle.get(i).get(j) + dp[j];
 
-                int next = triangle.get(i).get(j) + dp[i+1][j+1];
+                int next = triangle.get(i).get(j) + dp[j+1];
 
-                dp[i][j] = Math.min(down, next);
+                temp[j] = Math.min(down, next);
             }
+            dp = temp;
         }
          
-        return dp[0][0];
+        return dp[0];
     }
 }
