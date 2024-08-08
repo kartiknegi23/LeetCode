@@ -1,22 +1,4 @@
 class Solution {
-    public int minimum_sum(int[][] matrix, int m, int n, int[][] dp){
-        if(n<0 || n>=matrix[0].length)
-        return 1000000;
-
-        if(m==0){
-            return matrix[0][n];
-        }
-
-        if(dp[m][n]!=-1)
-        return dp[m][n];
-
-        int left = matrix[m][n] + minimum_sum(matrix, m-1, n-1, dp);
-        int center = matrix[m][n] + minimum_sum(matrix, m-1, n, dp);
-        int right = matrix[m][n] + minimum_sum(matrix, m-1, n+1, dp);
-
-        return dp[m][n] = Math.min(left, Math.min(center, right));
-    }
-
     public int minFallingPathSum(int[][] matrix) {
         int n = matrix.length;
 
