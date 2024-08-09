@@ -1,18 +1,28 @@
 class Solution {
-    public int climb(int n, int[] dp){
-        if(n<=2)
-        return dp[n]=n;
+    public int calculate(int n, int pos, int count, int[] dp){
+        if(pos==n)
+        return 1;
 
-        if(dp[n]!=-1)
-        return dp[n];
+        if(pos>n)
+        return 0;
 
-        return dp[n]=climb(n-1, dp)+climb(n-2, dp);
+        if(dp[pos]!=-1)
+        return dp[pos];
+
+        //ONe step//
+        int one = calculate(n, pos+1, count, dp);
+
+        //Two Steps//
+        int two = calculate(n, pos+2, count, dp);
+
+        return dp[pos] = one+two;
     }
 
     public int climbStairs(int n) {
-        int[]dp = new int[n+1];
+        int count = 0;
+        int[] dp = new int[n+1];
         Arrays.fill(dp, -1);
 
-        return climb(n, dp);
+        return calculate(n, 0, count, dp);
     }
 }
