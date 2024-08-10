@@ -32,7 +32,7 @@ class Solution {
         if(sum%2!=0)
         return false;
 
-        int[][] dp = new int[nums.length][sum+1];
+        int[][] dp = new int[nums.length][(sum/2)+1];
         for(int i=0;i<nums.length;i++){
             Arrays.fill(dp[i], -1);
         }
