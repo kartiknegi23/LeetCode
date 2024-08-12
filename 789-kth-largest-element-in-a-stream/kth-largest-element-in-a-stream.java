@@ -5,10 +5,18 @@ class KthLargest {
     public KthLargest(int k, int[] nums) {
         this.k = k;
         queue = new PriorityQueue<>(k);
-        for (int num : nums) {
-            add(num); // Ensure the queue contains only the k largest elements
+        for(int i=0;i<nums.length;i++){
+            if(queue.size()<k){
+                queue.add(nums[i]);
+            }
+            else{
+                if(nums[i]>queue.peek())
+                {
+                    queue.poll();
+                    queue.offer(nums[i]);
+                }
+            }
         }
-        System.out.println(queue);
     }
     
     public int add(int val) {
