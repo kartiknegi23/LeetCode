@@ -1,35 +1,5 @@
 class Solution {
 
-    public int find(int[] nums, int index, int target1, int[][] dp){
-        if(index<=0){
-            if(target1==nums[0])
-            return 1;
-
-            else
-            return 0;
-        }
-
-        if(target1==0)
-        return 1;
-
-        if(target1 < 0)
-        return 0;
-
-        if(dp[index][target1]!=-1)
-        return dp[index][target1];
-
-        int take = 0;
-
-        if(target1>=nums[index])
-        take = find(nums, index-1, target1-nums[index], dp);
-
-        int skip = find(nums, index-1, target1, dp);
-
-        int result = take | skip;
-
-        return dp[index][target1] = result;
-    }
-
     public boolean canPartition(int[] nums) {
         int sum = 0;
         for(int i=0;i<nums.length;i++){
@@ -53,9 +23,9 @@ class Solution {
                 
                 int take = 0;
                 if(target1>=nums[index])
-                take = find(nums, index-1, target1-nums[index], dp);
+                take = dp[index-1][target1-nums[index]];
 
-                int skip = find(nums, index-1, target1, dp);
+                int skip = dp[index-1][target1];
 
                 dp[index][target1] = take | skip;
             }
