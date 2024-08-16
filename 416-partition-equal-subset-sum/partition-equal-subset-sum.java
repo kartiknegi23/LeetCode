@@ -1,23 +1,23 @@
 class Solution {
 
-    public int find(int[] nums, int index, int target1, int sum, int[][] dp){
+    public int find(int[] nums, int index, int target1, int[][] dp){
         if(index<=0){
-            if(target1==sum/2)
+            if(target1==0)
             return 1;
 
             else
             return 0;
         }
 
-        if(target1 > sum/2)
+        if(target1 < 0)
         return 0;
 
         if(dp[index][target1]!=-1)
         return dp[index][target1];
 
-        int take = find(nums, index-1, target1+nums[index], sum, dp);
+        int take = find(nums, index-1, target1-nums[index], dp);
 
-        int skip = find(nums, index-1, target1, sum, dp);
+        int skip = find(nums, index-1, target1, dp);
 
         int result = take | skip;
 
@@ -38,7 +38,7 @@ class Solution {
             Arrays.fill(dp[i], -1);
         }
 
-        int result = find(nums, nums.length-1, 0, sum, dp);
+        int result = find(nums, nums.length-1, sum/2, dp);
 
         return result==1 ? true : false;
     }
