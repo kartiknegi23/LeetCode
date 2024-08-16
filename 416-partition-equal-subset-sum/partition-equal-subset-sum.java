@@ -1,30 +1,31 @@
 class Solution {
 
-    public int calculate(int[] nums, int sum, int index, int current, int[][] dp){
-        if(index>=nums.length || current>sum/2)
+    public int find(int[] nums, int index, int target1, int sum, int[][] dp){
+        if(index>=nums.length){
+            if(target1==sum/2)
+            return 1;
+
+            else
+            return 0;
+        }
+
+        if(target1 > sum/2)
         return 0;
 
-        if(current==sum/2)
-        return 1;
+        if(dp[index][target1]!=-1)
+        return dp[index][target1];
 
-        if(dp[index][current]!=-1)
-        return dp[index][current];
+        int take = find(nums, index+1, target1+nums[index], sum, dp);
 
-        //Take//
-        int take = calculate(nums, sum, index+1, current+nums[index], dp);
+        int skip = find(nums, index+1, target1, sum, dp);
 
-        //Skip//
-        int skip = calculate(nums, sum, index+1, current, dp);
+        int result = take | skip;
 
-        if(take==1 || skip==1)
-        return dp[index][current] = 1;
-
-        else
-        return dp[index][current] = 0;
+        return dp[index][target1] = result;
     }
 
     public boolean canPartition(int[] nums) {
-        int sum=0;
+        int sum = 0;
         for(int i=0;i<nums.length;i++){
             sum+=nums[i];
         }
@@ -32,11 +33,13 @@ class Solution {
         if(sum%2!=0)
         return false;
 
-        int[][] dp = new int[nums.length][(sum/2)+1];
+        int[][] dp = new int[nums.length][sum/2+1];
         for(int i=0;i<nums.length;i++){
             Arrays.fill(dp[i], -1);
         }
 
-        return calculate(nums, sum, 0, 0, dp) == 1 ? true : false;
+        int result = find(nums, 0, 0, sum, dp);
+
+        return result==1 ? true : false;
     }
 }
