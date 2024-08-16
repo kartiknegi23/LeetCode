@@ -9,6 +9,9 @@ class Solution {
             return 0;
         }
 
+        if(target1==0)
+        return 1;
+
         if(target1 < 0)
         return 0;
 
