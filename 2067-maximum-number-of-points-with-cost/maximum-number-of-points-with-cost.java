@@ -16,21 +16,18 @@ class Solution {
             long[] right = new long[n];
             long[] curr = new long[n];
 
-            // Left sweep
-            left[0] = dp[0];
-            for (int col = 1; col < n; col++) {
-                left[col] = Math.max(left[col - 1] - 1, dp[col]);
+            left[0]=dp[0];
+            for(int i=1;i<n;i++){
+                left[i] = Math.max(dp[i], left[i-1]-1);
             }
 
-            // Right sweep
-            right[n - 1] = dp[n - 1];
-            for (int col = n - 2; col >= 0; col--) {
-                right[col] = Math.max(right[col + 1] - 1, dp[col]);
+            right[n-1] = dp[n-1];
+            for(int i=n-2;i>=0;i--){
+                right[i] = Math.max(dp[i], right[i+1]-1);
             }
 
-            // Calculate current row dp values
-            for (int col = 0; col < n; col++) {
-                curr[col] = points[row][col] + Math.max(left[col], right[col]);
+            for(int i=0;i<n;i++){
+                curr[i] = points[row][i] + Math.max(left[i], right[i]);
             }
 
             dp = curr;
