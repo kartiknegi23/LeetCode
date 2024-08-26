@@ -22,12 +22,6 @@ class Solution {
         if(root==null)
         return;
 
-        if(root.children.size()==0)
-        {
-            arr.add(root.val);
-            return;
-        }
-
         for(int i=0;i<root.children.size();i++){
             dfs(root.children.get(i), arr);
         }
