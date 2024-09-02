@@ -3,6 +3,13 @@ class Solution {
         int index=0;
         int n=chalk.length;
 
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum+=chalk[i];
+        }
+
+        if(sum>k)
+        sum = sum-k;
 
         while(k >= chalk[index]){
             k-=chalk[index];
