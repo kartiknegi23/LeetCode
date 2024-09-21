@@ -7,6 +7,8 @@ class Solution {
 
         for(int i=0;i<=9;i++){
             int new_num = current*10+i;
+            if(new_num>n)
+            return;
             solve(new_num, n, result);
         }
     }
