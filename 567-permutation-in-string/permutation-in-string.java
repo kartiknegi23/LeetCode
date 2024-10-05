@@ -3,23 +3,32 @@ class Solution {
         int n = s1.length();
         int m = s2.length();
 
-
         if(n>m)
         return false;
 
-        char[] arr =  s1.toCharArray();
-        Arrays.sort(arr);
-        String str = new String(arr);
+        Map<Character, Integer>hashmap1 = new HashMap<>();
+        Map<Character, Integer>hashmap2 = new HashMap<>();
 
-        for(int i=0;i<=m-n;i++){
-            String sub_str = s2.substring(i, i+n);
+        for(int i=0;i<s1.length();i++){
+            hashmap1.put(s1.charAt(i), hashmap1.getOrDefault(s1.charAt(i), 0)+1);
+        }
+
+        int i=0;
+        int j=0;
+        while(j<m){
+            hashmap2.put(s2.charAt(j), hashmap2.getOrDefault(s2.charAt(j), 0)+1);
             
-            char[] ch = sub_str.toCharArray();
-            Arrays.sort(ch);
-            String new_str = new String(ch);
+            if((j-i+1) > n){
+                hashmap2.put(s2.charAt(i), hashmap2.get(s2.charAt(i))-1);
+                if(hashmap2.get(s2.charAt(i))==0)
+                hashmap2.remove(s2.charAt(i));
+                i++;
+            }
 
-            if(str.equals(new_str))
+            if(hashmap2.equals(hashmap1))
             return true;
+
+            j++;
         }
 
         return false;
