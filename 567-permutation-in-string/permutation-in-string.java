@@ -6,26 +6,24 @@ class Solution {
         if(n>m)
         return false;
 
-        Map<Character, Integer>hashmap1 = new HashMap<>();
-        Map<Character, Integer>hashmap2 = new HashMap<>();
+        int[] map1 = new int[26];
+        int[] map2 = new int[26];
 
         for(int i=0;i<s1.length();i++){
-            hashmap1.put(s1.charAt(i), hashmap1.getOrDefault(s1.charAt(i), 0)+1);
+            map1[s1.charAt(i)-'a']++;
         }
 
         int i=0;
         int j=0;
         while(j<m){
-            hashmap2.put(s2.charAt(j), hashmap2.getOrDefault(s2.charAt(j), 0)+1);
+            map2[s2.charAt(j)-'a']++;
             
             if((j-i+1) > n){
-                hashmap2.put(s2.charAt(i), hashmap2.get(s2.charAt(i))-1);
-                if(hashmap2.get(s2.charAt(i))==0)
-                hashmap2.remove(s2.charAt(i));
+                map2[s2.charAt(i)-'a']--;
                 i++;
             }
 
-            if(hashmap2.equals(hashmap1))
+            if(Arrays.equals(map1, map2))
             return true;
 
             j++;
