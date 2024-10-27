@@ -14,19 +14,28 @@ class Solution {
     }
 
     public int countSquares(int[][] matrix) {
-        int count = 0;
-        int[][] dp = new int[matrix.length][matrix[0].length];
-        for(int[] arr : dp){
-            Arrays.fill(arr, -1);
-        }
+        int result = 0;
+        int[][] dp = new int[matrix.length+1][matrix[0].length+1];
 
         for(int i=0;i<matrix.length;i++){
             for(int j=0;j<matrix[0].length;j++){
-                if(matrix[i][j]==1)
-                count = count + solve(i, j, matrix, dp);
+                if(i==0 || j==0){
+                    dp[i][j] = matrix[i][j];
+                }
+
+                else if(matrix[i][j]==1)
+                {
+                    int left = 1 + dp[i][j-1];
+                    int up = 1 + dp[i-1][j];
+                    int diagonal = 1 + dp[i-1][j-1];
+
+                    dp[i][j] = Math.min(left, Math.min(up, diagonal));
+                }
+
+                result += dp[i][j];
             }
         }
             
-        return count;
+        return result;
     }
 }
