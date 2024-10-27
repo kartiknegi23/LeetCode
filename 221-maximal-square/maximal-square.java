@@ -16,19 +16,24 @@ class Solution {
     public int maximalSquare(char[][] matrix) {
         int ans = 0;
         int[][] dp = new int[matrix.length][matrix[0].length];
-        for(int[] arr : dp){
-            Arrays.fill(arr, -1);
-        }
 
         for(int i=0;i<matrix.length;i++){
             for(int j=0;j<matrix[0].length;j++){
-                if(matrix[i][j]=='1'){
-                    int size = solve(i, j, matrix, dp);
-                    ans = Math.max(ans, size*size);
+                if(i==0 || j==0){
+                    dp[i][j] = (matrix[i][j] - '0');
                 }
+
+                else if(matrix[i][j]=='1'){
+                    int left = 1 + dp[i][j-1];
+                    int diagonal = 1 + dp[i-1][j-1];
+                    int up = 1 + dp[i-1][j];
+
+                    dp[i][j] = Math.min(left, Math.min(diagonal, up));
+                }
+                ans = Math.max(ans, dp[i][j]);
             }
         }
 
-        return ans;
+        return ans*ans;
     }
 }
