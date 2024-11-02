@@ -4,7 +4,7 @@ class Solution {
         int[] count = new int[nums.length];
         Arrays.fill(lis, 1);
         Arrays.fill(count, 1);
-        int maxi = 0;
+        int maxi = 1;
 
         for(int i=1;i<lis.length;i++){
             for(int j=0;j<i;j++){
@@ -27,6 +27,6 @@ class Solution {
             result += count[i];
         }
 
-        return result==0 ? 1 : result;
+        return result;
     }
 }
