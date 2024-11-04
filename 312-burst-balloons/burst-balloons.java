@@ -22,10 +22,22 @@ class Solution {
         }
         list.add(1);
         int[][] dp = new int[list.size()][list.size()];
-        for(int[] arr : dp){
-            Arrays.fill(arr, -1);
+        
+        for(int i=list.size()-2;i>=1;i--){
+            for(int j=1;j<=list.size()-2;j++){
+                if(i>j)
+                continue;
+
+                int max = Integer.MIN_VALUE;
+                for(int index=i;index<=j;index++){
+                    int cost = list.get(i-1)*list.get(index)*list.get(j+1) + dp[i][index-1] + dp[index+1][j];
+                    max = Math.max(max, cost);
+                }
+                dp[i][j] = max;
+            }
         }
 
-        return solve(1, list.size()-2, list, dp);
+
+        return dp[1][list.size()-2];
     }
 }
