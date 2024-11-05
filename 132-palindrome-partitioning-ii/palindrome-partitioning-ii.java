@@ -29,9 +29,21 @@ class Solution {
     }
 
     public int minCut(String s) {
-        int[] dp = new int[s.length()];
-        Arrays.fill(dp, -1);
+        int[] dp = new int[s.length()+1];
+        
+        dp[s.length()-1] = 1;
+        for(int i=s.length()-1;i>=0;i--){
+            int min = Integer.MAX_VALUE;
+            for(int index=i;index<=s.length()-1;index++){
+                if(isPalindrome(i,index,s)){
+                    int count = 1 + dp[index+1];
+                    min = Math.min(min, count);
+                }
+                
+            }
+            dp[i] = min;
+        }
 
-        return solve(0, s.length()-1, s, dp)-1;
+        return dp[0]-1;
     }
 }
