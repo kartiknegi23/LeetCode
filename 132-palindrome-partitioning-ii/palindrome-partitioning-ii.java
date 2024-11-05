@@ -10,12 +10,12 @@ class Solution {
         return true;
     }
 
-    public int solve(int i, int j, String s, int[][] dp){
+    public int solve(int i, int j, String s, int[] dp){
         if(i>j)
         return 0;
 
-        if(dp[i][j]!=-1)
-        return dp[i][j];
+        if(dp[i]!=-1)
+        return dp[i];
 
         int min = Integer.MAX_VALUE;
         for(int index=i;index<=j;index++){
@@ -25,14 +25,12 @@ class Solution {
             }
             
         }
-        return dp[i][j] = min;
+        return dp[i] = min;
     }
 
     public int minCut(String s) {
-        int[][] dp = new int[s.length()][s.length()];
-        for(int [] arr : dp){
-            Arrays.fill(arr, -1);
-        }
+        int[] dp = new int[s.length()];
+        Arrays.fill(dp, -1);
 
         return solve(0, s.length()-1, s, dp)-1;
     }
