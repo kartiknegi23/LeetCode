@@ -1,13 +1,27 @@
 class Solution {
     public int minChanges(String s) {
-        int i=1;
         int count = 0;
+        int length = 1;
+        char prev = s.charAt(0);
 
-        while(i<s.length()){
-            if(s.charAt(i)!=s.charAt(i-1))
-            count++;
-            i+=2;
+        for(int i=1;i<s.length();i++){
+            if(s.charAt(i)==prev){
+                length++;
+                prev = s.charAt(i);
+                continue;
+            }
+            else{
+                if(length%2!=0){
+                    count++;
+                    prev = s.charAt(i-1);
+                    length++;
+                    continue;
+                }
+                length=1;
+                prev = s.charAt(i);
+            }
         }
+
         return count;
     }
 }
