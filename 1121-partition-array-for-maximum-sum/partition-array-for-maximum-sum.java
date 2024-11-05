@@ -20,9 +20,24 @@ class Solution {
     }
 
     public int maxSumAfterPartitioning(int[] arr, int k) {
-        int[] dp = new int[arr.length];
-        Arrays.fill(dp, -1);
+        int[] dp = new int[arr.length+1];
+        
+        dp[arr.length-1] = arr[arr.length-1];
 
-        return solve(0, arr.length-1, arr, k, dp);
+        for(int i=arr.length-1;i>=0;i--){
+            int ans = 0;
+            int sum = Integer.MIN_VALUE;
+            int count = 0; 
+            int max = Integer.MIN_VALUE; 
+            for(int index=i;index<Math.min(i+k,arr.length);index++){
+                count++;
+                max = Math.max(max, arr[index]);
+                sum = max*count + dp[index+1];
+                ans = Math.max(ans, sum);
+            }
+            dp[i] = ans;
+        }
+
+        return dp[0];
     }
 }
