@@ -29,7 +29,7 @@ class Solution {
     }
 
     public int minCut(String s) {
-        int[][] dp = new int[s.length()+1][s.length()+1];
+        int[][] dp = new int[s.length()][s.length()];
         for(int [] arr : dp){
             Arrays.fill(arr, -1);
         }
