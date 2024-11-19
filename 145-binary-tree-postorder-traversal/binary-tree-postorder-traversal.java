@@ -14,22 +14,18 @@
  * }
  */
 class Solution {
-    public void dfs(TreeNode root, List<Integer>arr){
+    public void postorder(TreeNode root, List<Integer> list){
         if(root==null)
         return;
 
-        dfs(root.left,arr);
-        
-        dfs(root.right,arr);
-        arr.add(root.val);
+        postorder(root.left, list);
+        postorder(root.right, list);
+        list.add(root.val);
     }
 
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> arr = new ArrayList<>();
-        if(root==null)
-        return arr;
-
-        dfs(root, arr);
-        return arr;
+        List<Integer> list = new ArrayList<>();
+        postorder(root, list);
+        return list;
     }
 }
