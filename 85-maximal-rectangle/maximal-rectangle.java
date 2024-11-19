@@ -1,74 +1,66 @@
 class Solution {
+    public void calculate_left(int[] left_min ,int[] heights){
+        left_min[0]=-1;
+        Stack<Integer>stack = new Stack<>();
+        stack.push(0);
+        for(int i=1;i<heights.length;i++){
+            while(stack.size()>0 && heights[i]<=heights[stack.peek()])
+            stack.pop();
 
-    public int[] calculate_left_min(int[] left_min, int[] row) {
-        Stack<Integer> stack = new Stack<>();
-        for (int i = 0; i < row.length; i++) {
-
-            while (!stack.isEmpty() && ((row[i] - '0') <= (row[stack.peek()]-'0') ) )
-                stack.pop();
-
-            if (stack.isEmpty())
-                left_min[i] = 0;
+            if(stack.isEmpty())
+            left_min[i]=-1;
 
             else
-                {   
-                    left_min[i] = stack.peek()+1;}
+            left_min[i]=stack.peek();
 
             stack.push(i);
-            
-             
         }
-        return left_min;
     }
 
-    public int[] calculate_right_min(int[] right_min, int[] row) {
-        Stack<Integer> stack = new Stack<>();
-        for (int i = row.length - 1; i >= 0; i--) {
-            while (!stack.isEmpty() && ((row[i] - '0') <= (row[stack.peek()]-'0') ) )
-                stack.pop();
+    public void calculate_right(int[] right_min ,int[] heights){
+        right_min[right_min.length-1]=right_min.length;
+        Stack<Integer>stack = new Stack<>();
+        stack.push(right_min.length-1);
+        for(int i=heights.length-2;i>=0;i--){
+            while(stack.size()>0 && heights[i]<=heights[stack.peek()])
+            stack.pop();
 
-            if (stack.isEmpty())
-                right_min[i] = row.length - 1;
+            if(stack.isEmpty())
+            right_min[i]=heights.length;
 
             else
-                right_min[i] = stack.peek()-1;
+            right_min[i]=stack.peek();
 
             stack.push(i);
         }
-        
-
-        return right_min;
     }
 
     public int maximalRectangle(char[][] matrix) {
-        int max_area = 0;
-        int[] arr = new int[matrix[0].length];
-        Arrays.fill(arr, 0);
+        int[] heights = new int[matrix[0].length];
+        int ans = Integer.MIN_VALUE;
 
-        for (int i=0;i<matrix.length;i++) {
-            
+        for(int i=0;i<matrix.length;i++){
             for(int j=0;j<matrix[0].length;j++){
                 if(matrix[i][j]=='1')
-                arr[j]++;
+                heights[j]++;
 
                 else
-                arr[j]=0;
+                heights[j]=0;
             }
 
+            int[] left_min = new int[heights.length];
+            int[] right_min = new int[heights.length];
 
-            int[] left_min = new int[matrix[0].length];
-            int[] right_min = new int[matrix[0].length];
+            calculate_left(left_min, heights);
+            calculate_right(right_min, heights);
 
-            left_min = calculate_left_min(left_min, arr);
-
-            right_min = calculate_right_min(right_min, arr);
-
-            for(int j=0;j<matrix[0].length;j++){
-                max_area = Math.max(max_area, ((right_min[j] - left_min[j] + 1) * arr[j]));
+            for(int j=0;j<heights.length;j++){
+                int area = (right_min[j]-left_min[j]-1)*heights[j];
+                ans = Math.max(ans, area);
             }
-
-
         }
-        return max_area;
+
+        return ans;
+
     }
 }
