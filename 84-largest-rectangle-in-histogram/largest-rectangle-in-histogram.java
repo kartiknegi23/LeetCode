@@ -2,41 +2,46 @@ class Solution {
     public int largestRectangleArea(int[] heights) {
         int[] left_min = new int[heights.length];
         int[] right_min = new int[heights.length];
-        Stack<Integer> stack = new Stack<>();
 
-        for(int i=0;i<heights.length;i++){
-            while(!stack.isEmpty() && heights[i]<=heights[stack.peek()])
+        int ans = Integer.MIN_VALUE;
+
+        left_min[0]=-1;
+        Stack<Integer>stack = new Stack<>();
+        stack.push(0);
+        for(int i=1;i<heights.length;i++){
+            while(stack.size()>0 && heights[i]<=heights[stack.peek()])
             stack.pop();
 
-            if(!stack.isEmpty())
-            left_min[i]=stack.peek()+1;
+            if(stack.isEmpty())
+            left_min[i]=-1;
 
             else
-            left_min[i]= 0;
+            left_min[i]=stack.peek();
 
             stack.push(i);
         }
 
         stack.clear();
-
-        for(int j=heights.length-1;j>=0;j--){
-            while(!stack.isEmpty() && heights[j]<=heights[stack.peek()])
+        right_min[right_min.length-1]=right_min.length;
+        stack.push(right_min.length-1);
+        for(int i=heights.length-2;i>=0;i--){
+            while(stack.size()>0 && heights[i]<=heights[stack.peek()])
             stack.pop();
 
             if(stack.isEmpty())
-            right_min[j]=heights.length-1;
+            right_min[i]=right_min.length;
 
             else
-            right_min[j]=stack.peek()-1;
+            right_min[i]=stack.peek();
 
-            stack.push(j);
+            stack.push(i);
         }
 
-        int area = 0;
         for(int i=0;i<heights.length;i++){
-            area = Math.max(area, ((right_min[i]-left_min[i]+1)*heights[i]) );
+            int area = (right_min[i]-left_min[i]-1)*heights[i];
+            ans = Math.max(ans, area);
         }
 
-        return area;
+        return ans;
     }
 }
