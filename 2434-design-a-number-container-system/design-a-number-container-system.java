@@ -11,8 +11,10 @@ class NumberContainers {
             int del_num = idxmap.get(index);
             TreeSet<Integer> set = numbermap.get(del_num);
             set.remove(index);
+            if(set.size()==0){
+                numbermap.remove(del_num);
+            }
             idxmap.put(index, number);
-
         }
 
         if(numbermap.containsKey(number)){
@@ -32,8 +34,7 @@ class NumberContainers {
         return -1;
 
         TreeSet<Integer> set = numbermap.get(number);
-        if(set.size()==0)
-        return -1;
+
         Integer first = set.iterator().next();
         return first;
     }
