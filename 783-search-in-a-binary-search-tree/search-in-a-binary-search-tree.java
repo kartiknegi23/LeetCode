@@ -22,14 +22,10 @@ class Solution {
         return root;
 
         //left//
-        TreeNode left = searchBST(root.left, val);
+        if(val < root.val)
+        return searchBST(root.left, val);
 
-        //right//
-        TreeNode right = searchBST(root.right, val);
-
-        if(left!=null)
-        return left;
-
-        return right;
+        else
+        return searchBST(root.right, val);
     }
 }
