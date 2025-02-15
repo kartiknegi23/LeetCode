@@ -1,7 +1,7 @@
 class Solution {
-    public boolean check(int i, List<Integer> list, int idx, int[] sum, int[] vsum){
+    public boolean check(int i, List<Integer> list, int idx, int sum, int vsum){
         if(idx >= list.size()){
-            if(sum[0]+vsum[0] == i)
+            if(sum+vsum == i)
             return true;
 
             else
@@ -9,20 +9,20 @@ class Solution {
         }
 
         int currentDigit = list.get(idx);
-        int originalSum = sum[0];
-        int originalVsum = vsum[0];
+        int originalSum = sum;
+        int originalVsum = vsum;
         
         //take sum//
-        sum[0] = sum[0] + vsum[0];
-        vsum[0] = currentDigit;
+        sum = sum + vsum;
+        vsum = currentDigit;
         boolean take = check(i, list, idx+1, sum, vsum);
-        sum[0] = originalSum;
-        vsum[0] = originalVsum; 
+        sum = originalSum;
+        vsum = originalVsum; 
 
         //take in vsum//
-        vsum[0] = vsum[0]*10 + list.get(idx);
+        vsum = vsum*10 + list.get(idx);
         boolean leave = check(i, list, idx+1, sum, vsum);
-        vsum[0] = originalVsum;
+        vsum = originalVsum;
 
         return take || leave;
     }
@@ -36,10 +36,8 @@ class Solution {
             num/=10;
         }
         Collections.reverse(list);
-        int[] sum = new int[1];
-        sum[0] = 0;
-        int[] vsum = new int[1];
-        vsum[0] = 0;
+        int sum = 0;
+        int vsum = 0;
 
         return check(i, list, 0, sum, vsum);
     }
