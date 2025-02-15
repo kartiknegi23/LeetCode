@@ -1,5 +1,5 @@
 class Solution {
-    public boolean check(int i, int square, List<Integer> list, int idx, int[] sum, int[] vsum){
+    public boolean check(int i, List<Integer> list, int idx, int[] sum, int[] vsum){
         if(idx >= list.size()){
             if(sum[0]+vsum[0] == i)
             return true;
@@ -12,17 +12,16 @@ class Solution {
         int originalSum = sum[0];
         int originalVsum = vsum[0];
         
-
         //take sum//
         sum[0] = sum[0] + vsum[0];
         vsum[0] = currentDigit;
-        boolean take = check(i, square, list, idx+1, sum, vsum);
+        boolean take = check(i, list, idx+1, sum, vsum);
         sum[0] = originalSum;
         vsum[0] = originalVsum; 
 
         //take in vsum//
         vsum[0] = vsum[0]*10 + list.get(idx);
-        boolean leave = check(i, square, list, idx+1, sum, vsum);
+        boolean leave = check(i, list, idx+1, sum, vsum);
         vsum[0] = originalVsum;
 
         return take || leave;
@@ -42,7 +41,7 @@ class Solution {
         int[] vsum = new int[1];
         vsum[0] = 0;
 
-        return check(i, square, list, 0, sum, vsum);
+        return check(i, list, 0, sum, vsum);
     }
 
     public int punishmentNumber(int n) {
